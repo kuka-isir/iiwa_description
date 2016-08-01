@@ -11,10 +11,29 @@
   <!-- some constants -->
   <xacro:property name="safety_controller_k_pos" value="100" />
   <xacro:property name="safety_controller_k_vel" value="2" />
-  <xacro:property name="joint_damping" value="0.5" />
-  <xacro:property name="joint_friction" value="1.0" />
   <xacro:property name="max_effort" value="300"/>
   <xacro:property name="max_velocity" value="10"/>
+  
+  
+  <xacro:property name="damping_factor" value="1.0"/>
+
+   <xacro:property name="d0" value="${damping_factor*0.241499}"/>
+   <xacro:property name="d1" value="${damping_factor*0.373279}"/>
+   <xacro:property name="d2" value="${damping_factor*0.110253}"/>
+   <xacro:property name="d3" value="${damping_factor*0.100000}"/>
+   <xacro:property name="d4" value="${damping_factor*0.100000}"/>
+   <xacro:property name="d5" value="${damping_factor*0.124842}"/>
+   <xacro:property name="d6" value="${damping_factor*0.100000}"/>
+
+   <xacro:property name="friction_factor" value="1.0"/>
+
+   <xacro:property name="f0" value="${friction_factor*0.319088}"/>
+   <xacro:property name="f1" value="${friction_factor*0.181301}"/>
+   <xacro:property name="f2" value="${friction_factor*0.073019}"/>
+   <xacro:property name="f3" value="${friction_factor*0.176713}"/>
+   <xacro:property name="f4" value="${friction_factor*0.034631}"/>
+   <xacro:property name="f5" value="${friction_factor*0.133913}"/>
+   <xacro:property name="f6" value="${friction_factor*0.087096}"/>
 
   <xacro:macro name="iiwa14" params="parent hardware_interface robot_name *origin">
 
@@ -69,7 +88,7 @@
            soft_upper_limit="${168 * PI / 180}"
            k_position="${safety_controller_k_pos}"
            k_velocity="${safety_controller_k_vel}"/>
-      <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+      <dynamics damping="${d0}" friction="${f0}"/>
     </joint>
 
     <link name="link_1">
@@ -108,7 +127,7 @@
            soft_upper_limit="${118 * PI / 180}"
            k_position="${safety_controller_k_pos}"
            k_velocity="${safety_controller_k_vel}"/>
-      <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+      <dynamics damping="${d1}" friction="${f1}"/>
     </joint>
 
     <link name="link_2">
@@ -147,7 +166,7 @@
            soft_upper_limit="${168 * PI / 180}"
            k_position="${safety_controller_k_pos}"
            k_velocity="${safety_controller_k_vel}"/>
-      <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+      <dynamics damping="${d2}" friction="${f2}"/>
     </joint>
 
     <link name="link_3">
@@ -186,7 +205,7 @@
            soft_upper_limit="${118 * PI / 180}"
            k_position="${safety_controller_k_pos}"
            k_velocity="${safety_controller_k_vel}"/>
-      <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+      <dynamics damping="${d3}" friction="${f3}"/>
     </joint>
 
     <link name="link_4">
@@ -225,7 +244,7 @@
            soft_upper_limit="${168 * PI / 180}"
            k_position="${safety_controller_k_pos}"
            k_velocity="${safety_controller_k_vel}"/>
-      <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+      <dynamics damping="${d4}" friction="${f4}"/>
     </joint>
 
     <link name="link_5">
@@ -264,7 +283,7 @@
            soft_upper_limit="${118 * PI / 180}"
            k_position="${safety_controller_k_pos}"
            k_velocity="${safety_controller_k_vel}"/>
-      <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+      <dynamics damping="${d5}" friction="${f5}"/>
     </joint>
 
     <link name="link_6">
@@ -303,7 +322,7 @@
            soft_upper_limit="${173 * PI / 180}"
            k_position="${safety_controller_k_pos}"
            k_velocity="${safety_controller_k_vel}"/>
-      <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
+      <dynamics damping="${d6}" friction="${f6}"/>
     </joint>
 
     <link name="link_7">
