@@ -15,7 +15,7 @@
   <xacro:property name="max_velocity" value="10"/>
   
   
-  <xacro:property name="damping_factor" value="1.0"/>
+  <xacro:property name="damping_factor" value="0.0"/>
 
    <xacro:property name="d0" value="${damping_factor*0.241499}"/>
    <xacro:property name="d1" value="${damping_factor*0.373279}"/>
@@ -25,15 +25,15 @@
    <xacro:property name="d5" value="${damping_factor*0.124842}"/>
    <xacro:property name="d6" value="${damping_factor*0.100000}"/>
 
-   <xacro:property name="friction_factor" value="1.0"/>
+   <xacro:property name="friction_factor" value="0.0"/>
 
-   <xacro:property name="f0" value="${friction_factor*0.319088}"/>
+   <xacro:property name="f0" value="${friction_factor*0.319088	*	1.0 }"/>
    <xacro:property name="f1" value="${friction_factor*0.181301}"/>
    <xacro:property name="f2" value="${friction_factor*0.073019}"/>
    <xacro:property name="f3" value="${friction_factor*0.176713}"/>
-   <xacro:property name="f4" value="${friction_factor*0.034631}"/>
+   <xacro:property name="f4" value="${friction_factor*0.034631	*	1.0 }"/>
    <xacro:property name="f5" value="${friction_factor*0.133913}"/>
-   <xacro:property name="f6" value="${friction_factor*0.087096}"/>
+   <xacro:property name="f6" value="${friction_factor*0.087096 	*	1.0 }"/>
 
   <xacro:macro name="iiwa14" params="parent hardware_interface robot_name *origin">
 
@@ -328,7 +328,7 @@
     <link name="link_7">
       <inertial>
         <origin xyz="-0.03465 -0.023242 ${0.071377-0.081}" rpy="0 0 0"/>
-        <mass value="0.354321"/>
+        <mass value="${0.354321 / 0.308 * 0.44}"/> <!--this is for the MFT Pneumatisch flange-->
         <inertia ixx="0.007946"  ixy="0.000221"  ixz="0.000294" iyy="0.010889" iyz="-0.000294" izz="0.002944" />
       </inertial>
 

@@ -15,7 +15,7 @@
   <xacro:property name="max_velocity" value="10"/>
   
   
-   <xacro:property name="damping_factor" value="1.0"/>
+   <xacro:property name="damping_factor" value="0.0"/>
 
    <xacro:property name="d0" value="${damping_factor*0.1}"/>
    <xacro:property name="d1" value="${damping_factor*0.1}"/>
@@ -25,7 +25,7 @@
    <xacro:property name="d5" value="${damping_factor*0.1}"/>
    <xacro:property name="d6" value="${damping_factor*0.1}"/>
 
-   <xacro:property name="friction_factor" value="1.0"/>
+   <xacro:property name="friction_factor" value="0.0"/>
 
    <xacro:property name="f0" value="${friction_factor*0.1}"/>
    <xacro:property name="f1" value="${friction_factor*0.1}"/>
@@ -290,7 +290,7 @@
       <inertial>
         <origin xyz="0 0.0006 0.0004" rpy="0 0 0"/>
         <mass value="1.8"/>
-        <inertia ixx="0.005"  ixy="0"  ixz="0" iyy="0.0036" iyz="0" izz="0.0047" />
+        <inertia ixx="0.025"  ixy="0"  ixz="0" iyy="0.0136" iyz="0" izz="0.0247" />
       </inertial>
 
       <visual>
@@ -328,14 +328,15 @@
     <link name="link_7">
       <inertial>
         <origin xyz="0 0 0.02" rpy="0 0 0"/>
-        <mass value="0.3"/>
-        <inertia ixx="0.001"  ixy="0"  ixz="0" iyy="0.001" iyz="0" izz="0.001" />
+        <mass value="${0.3 / 0.308 * 0.44}"/> <!--this is for the MFT Pneumatisch flange-->
+        <inertia ixx="0.01"  ixy="0"  ixz="0" iyy="0.01" iyz="0" izz="0.01" />
       </inertial>
 
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://iiwa_description/meshes/iiwa14/visual/link_7.stl"/>
+<!--           <mesh filename="package://iiwa_description/meshes/iiwa14/visual/link_7.stl"/> -->
+		  <mesh filename="package://iiwa_description/meshes/iiwa14/visual/link_7-MF-Touch-pneumatisch.stl"/>
         </geometry>
         <material name="Grey"/>
       </visual>
@@ -343,7 +344,8 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://iiwa_description/meshes/iiwa14/collision/link_7.stl"/>
+<!--           <mesh filename="package://iiwa_description/meshes/iiwa14/collision/link_7.stl"/> -->
+		  <mesh filename="package://iiwa_description/meshes/iiwa14/collision/link_7-MF-Touch-pneumatisch.stl"/>
         </geometry>
         <material name="Grey"/>
       </collision>
@@ -364,8 +366,17 @@
       <origin xyz="0 0 0.045" rpy="${PI} ${PI} ${PI}"/>
       <axis xyz="0 0 1"/>
     </joint>
+	
+	<joint name="joint_ee_kuka_mft_pneum" type="fixed">
+      <parent link="link_7"/>
+      <child link="link_ee_kuka_mft_pneum"/>
+      <origin xyz="0 0 0.071" rpy="0 -${PI/2} 0"/>
+    </joint>
 
     <link name="link_ee_kuka">
+    </link>
+	
+	<link name="link_ee_kuka_mft_pneum">
     </link>
 
     <!--Extensions -->
